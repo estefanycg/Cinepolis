@@ -15,7 +15,7 @@
 
             <!-- Row 1: Image with gradient and icon -->
             <RelativeLayout Grid.Row="0">
-                <Image Source="{Binding Imagen}" Aspect="AspectFit" />
+                <Image Source="{Binding Imagen}" Aspect="AspectFill" HeightRequest="150" WidthRequest="150"  HorizontalOptions="Center" />
                 <!-- Cambiar AspectFill a AspectFit -->
                 <BoxView BackgroundColor="Transparent"
                  RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"

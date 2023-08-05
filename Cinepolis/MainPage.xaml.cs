@@ -26,8 +26,9 @@ namespace Cinepolis.Views
 
         private async void CarteleraButtonClicked(object sender, EventArgs e)
         {
-    
-            Application.Current.MainPage = new AppShell();
+            int id = 0;
+            string ciudad = "No se ha seleccionado";
+            Application.Current.MainPage = new AppShell(id, ciudad);
             
         }
     }

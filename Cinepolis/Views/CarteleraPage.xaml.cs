@@ -17,15 +17,21 @@ namespace Cinepolis.Views
         public List<CarouselItem> Estrenos { get; set; }
         public List<CarouselItem> Proximamente { get; set; }
 
-        public int idciudad;
+        public static int idciudad;
+        public static string Ciudad;
 
-        public CarteleraPage(int id, string ciudad)
+        public CarteleraPage()
         {
-            idciudad = id;
             InitializeComponent();
             Estrenos = new List<CarouselItem> { };
             Proximamente = new List<CarouselItem> { };
             //BindingContext = this;
+        }
+
+        public static void ReceiveValues(int id, string ciudad)
+        {
+            idciudad = id;
+            Ciudad = ciudad;
         }
 
         protected override async void OnAppearing()

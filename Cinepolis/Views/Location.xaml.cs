@@ -62,10 +62,8 @@ namespace Cinepolis.Views
                 // Muestra un DisplayAlert con el Id de la ciudad seleccionada
                 // Puedes utilizar el Id y el Nombre de la ciudad como necesites
                 // Por ejemplo, puedes navegar a la página de Cartelera pasando ambos valores como parámetros.
-                    Navigation.PushAsync(new CarteleraPage(selectedCityId, selectedCityName));
-
-
-
+                    //Navigation.PushAsync(new CarteleraPage(selectedCityId, selectedCityName));
+                    Application.Current.MainPage = new AppShell(selectedCityId, selectedCityName);
             }  
             else
             {
@@ -74,4 +72,6 @@ namespace Cinepolis.Views
         }
 
     }
+
+
 }
