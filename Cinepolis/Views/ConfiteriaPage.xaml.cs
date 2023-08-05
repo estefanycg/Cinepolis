@@ -1,21 +1,16 @@
-﻿
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using Cinepolis.ModelViews;
 using Cinepolis.Views;
+using Xamarin.Forms;
 using Rg.Plugins.Popup.Services;
-
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace Cinepolis.Views
 {
-
     public partial class ConfiteriaPage : ContentPage
     {
-
         public List<Golosina> ConfiteriaList { get; set; }
 
         // Nueva propiedad para el total a pagar
@@ -36,36 +31,34 @@ namespace Cinepolis.Views
         public ConfiteriaPage()
         {
             InitializeComponent();
-
-            ConfiteriaList = new List<Golosina>
-            {
-                new Golosina
-                {
-                    NombreProducto = "Combo 1",
-                    ImagenProducto = "combo1.jpg",
-                    Descripcion = "Palomitas de Maiz + 2 Refrescos",
-                    Precio = 120,
-                    Cantidad = 0,
-                },
-                new Golosina
-                {
-                    NombreProducto = "Combo 2",
-                    ImagenProducto = "combo2.jpg",
-                    Descripcion = "Palomitas de Maiz + 1 Refresco",
-                    Precio = 95,
-                    Cantidad = 0,
-                },
-                // Agregar aquí los demás productos definidos previamente...
-            };
-
-            // Suscribir al evento CantidadChanged para cada objeto Golosina
-            foreach (var producto in ConfiteriaList)
-            {
-                producto.PropertyChanged += CantidadChanged;
-            }
-
-            UpdateTotal(); // Calcular el total al inicio
+            LoadProductos(); // Llama al método para obtener los productos desde el servidor
             BindingContext = this;
+        }
+
+        private async void LoadProductos()
+        {
+            try
+            {
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetStringAsync("http://64.227.10.233/productos");
+                var data = JsonConvert.DeserializeObject<ProductosResponse>(response);
+
+                if (data != null && data.Data?.Productos != null)
+                {
+                    ConfiteriaList = data.Data.Productos;
+                    foreach (var producto in ConfiteriaList)
+                    {
+                        producto.PropertyChanged += CantidadChanged;
+                        producto.ImagenCargada = ImageSource.FromUri(new Uri("http://64.227.10.233" + producto.Imagen));
+
+                    }
+                    UpdateTotal(); // Calcular el total al inicio
+                    OnPropertyChanged(nameof(ConfiteriaList));
+                }
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         // Método para actualizar el total cada vez que cambie la cantidad de un producto
@@ -101,7 +94,5 @@ namespace Cinepolis.Views
             // Muestra la ventana emergente
             await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(detalleFacturaPopup);
         }
-
     }
-
 }

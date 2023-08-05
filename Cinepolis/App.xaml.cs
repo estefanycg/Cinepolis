@@ -11,7 +11,7 @@ namespace Cinepolis
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new Location());
+            MainPage = new NavigationPage(new ConfiteriaPage());
             
         }
 

@@ -107,12 +107,12 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Agregar la imagen -->
-                                <Image Source="{Binding ImagenProducto}" HeightRequest="100" WidthRequest="100" Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" />
+                                <Image Source="{Binding ImagenCargada}" HeightRequest="100" WidthRequest="100" Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" />
 
                                 <!-- StackLayout para el nombre y descripción -->
                                 <StackLayout Grid.Row="0" Grid.Column="1">
                                     <!-- Nombre del producto -->
-                                    <Label Text="{Binding NombreProducto}" FontAttributes="Bold" FontSize="20" TextColor="Black" />
+                                    <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="20" TextColor="Black" />
 
                                     <!-- Descripción del producto -->
                                     <Label Text="{Binding Descripcion}" FontSize="16" TextColor="Black" />

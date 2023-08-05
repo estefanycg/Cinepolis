@@ -9,14 +9,16 @@ namespace Cinepolis.ModelViews
     {
 
         public string Id { get; set; }
+        public ImageSource ImagenCargada { get; set; }
 
-        public string NombreProducto { get; set; }
+
+        public string Nombre { get; set; }
 
         public string Descripcion { get; set; }
 
         public double Precio { get; set; }
 
-        public string ImagenProducto { get; set; }
+        public string Imagen { get; set; }
 
         private int cantidad;
         public int Cantidad
