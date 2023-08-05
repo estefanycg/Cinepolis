@@ -21,7 +21,7 @@ namespace Cinepolis.Views
 
         public int pelicula;
         public int ciudad;
-     
+
         public string Titulo { get; set; } // Convertimos la variable titulo en una propiedad
         public string Duracion { get; set; } // Convertimos la variable titulo en una propiedad
         public string Genero { get; set; } // Convertimos la variable titulo en una propiedad
@@ -31,11 +31,11 @@ namespace Cinepolis.Views
 
         public ImageSource Imagen { get; set; } // Convertimos la variable titulo en una propiedad
 
-        public MovieViewPage(int idpelicula,int idciudad)
+        public MovieViewPage(int idpelicula, int idciudad)
         {
-            
-            ciudad= idciudad;
-            pelicula= idpelicula;
+
+            ciudad = idciudad;
+            pelicula = idpelicula;
             HorariosPelicula = new List<Horarios> { };
 
             //DisplayAlert("Imagen seleccionada", $"pelicula: {idpelicula}", $"ciudad: {idciudad}", "OK");
@@ -61,34 +61,35 @@ namespace Cinepolis.Views
                     httpClient.BaseAddress = new Uri("http://64.227.10.233/");
                     httpClient.DefaultRequestHeaders.Accept.Clear();
                     httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage response = await httpClient.GetAsync("servicios/"+pelicula+"?ciudad="+ciudad);
+                    HttpResponseMessage response = await httpClient.GetAsync("servicios/" + pelicula + "?ciudad=" + ciudad);
                     if (response.IsSuccessStatusCode)
                     {
                         string jsonResponse = await response.Content.ReadAsStringAsync();
                         dynamic data = JsonConvert.DeserializeObject(jsonResponse);
 
-                        Titulo=data?.data?.pelicula?.titulo;
-                        Duracion = "Duracion: " +  data?.data?.pelicula?.duracion+"Min";
+                        Titulo = data?.data?.pelicula?.titulo;
+                        Duracion = "Duracion: " + data?.data?.pelicula?.duracion + "Min";
                         Genero = "Genero: " + data?.data?.pelicula?.genero;
-                        Clasificacion = "Clasificacion: "+data?.data?.pelicula?.clasificacion;
-                        Actores =  data?.data?.pelicula?.actores;
+                        Clasificacion = "Clasificacion: " + data?.data?.pelicula?.clasificacion;
+                        Actores = data?.data?.pelicula?.actores;
                         Sinopsis = data?.data?.pelicula?.sinopsis;
                         string img = "http://64.227.10.233" + data?.data?.pelicula?.imagen;
                         Imagen = ImageSource.FromUri(new Uri(img));
 
                         JArray horarioArray = data?.horarios;
 
-                        if(horarioArray != null)
+                        if (horarioArray != null)
                         {
                             foreach (var horario in horarioArray)
                             {
+                                int idHorario = (int)horario["id"];
                                 int idSala = (int)horario["sala"]["id"];
                                 string horaInicio = (string)horario["hora_inicio"];
-                                HorariosPelicula.Add(new Horarios { idsala = idSala, horainicio = horaInicio });
+                                HorariosPelicula.Add(new Horarios { idhorario = idHorario, idsala = idSala, horainicio = horaInicio });
                             }
                         }
                     }
-                   
+
                     else
                     {
                         await DisplayAlert("Error", "Failed to fetch data from the API", "OK");
@@ -103,7 +104,10 @@ namespace Cinepolis.Views
 
         public void OnSeleccionarClicked(object sender, EventArgs e)
         {
-            // Aquí puedes manejar la lógica cuando se hace clic en el botón "Seleccionar"
+            Button button = (Button)sender;
+            int idHorario = (int)button.CommandParameter; // Obtener el ID del horario del CommandParameter
+            string idHorarioString = idHorario.ToString(); // Convertir el ID a una cadena
+            Navigation.PushAsync(new SeatsMoviePage(idHorario));
         }
     }
 }

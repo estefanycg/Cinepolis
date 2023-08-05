@@ -108,7 +108,8 @@
                                         <!-- Botón para seleccionar -->
                                         <Button Grid.Column="2" Text="Seleccionar" Clicked="OnSeleccionarClicked"
                                             BackgroundColor="#3b5998" TextColor="White" FontSize="14" CornerRadius="15"
-                                            Padding="10" />
+                                            Padding="10" CommandParameter="{Binding idhorario}">
+                                        </Button>
                                     </Grid>
                                 </Frame>
                             </ViewCell>
