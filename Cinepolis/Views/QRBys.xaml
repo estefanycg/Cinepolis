@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cinepolis.Views.QRBys"
+             Title="QR de Compra">
+    <ContentPage.Content>
+        <StackLayout Spacing="10" VerticalOptions="StartAndExpand">
+            <!-- Columna de la imagen -->
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" Spacing="5" Margin="20,20,20,0">
+                <Image Source="Barbie.jpg" Aspect="AspectFit" HeightRequest="150" />
+                <!-- Ajusta el HeightRequest según tus necesidades -->
+
+                <!-- Columna de la información -->
+                <StackLayout VerticalOptions="StartAndExpand" Spacing="6">
+                    <Label Text="Barbie" FontAttributes="Bold" FontSize="18"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Ciudad:" FontAttributes="Bold" FontSize="15" />
+                        <Label Text="Nueva York" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Fecha:" FontAttributes="Bold" FontSize="15" />
+                        <Label Text="Sábado, 29 julio 2023" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Hora:" FontAttributes="Bold" FontSize="15" />
+                        <Label Text="5:00 PM"/>
+                        <Label Text="Sala:" FontAttributes="Bold" FontSize="15" />
+                        <Label Text="3" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Asientos:" FontAttributes="Bold" FontSize="15" />
+                        <Label Text="B1,B3" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Precio Total:" FontAttributes="Bold" FontSize="15" />
+                        <Label Text="L.140" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Padding="20">
+                <BoxView Color="#000" HeightRequest="1" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+            <Frame HasShadow="True" BorderColor="DarkGray" CornerRadius="10" Margin="70,0"  HeightRequest="200" VerticalOptions="Center">
+
+            </Frame>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="2" Padding="20,0">
+                <Label Text="Por favor, muestre este código QR para validar su compra en las instalaciones del cine." TextColor="Black" FontSize="16" VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="2" Padding="20,0">
+                <Label Text="Este código es equivalente a una factura puede tomar una captura del mismo." TextColor="Black" FontSize="16" VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="2" Padding="20,0">
+                <Label Text="¡ALERTA!" TextColor="Red" FontSize="16" VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="2" Padding="20,0">
+                <Label Text="Para acceder a nuestras instalaciones y disfrutar de tu experiencia cinematográfica, es imprescindible que presentes tu carné de identificación junto con la factura QR generada al momento de adquirir tu boleto." TextColor="Red" FontSize="16" VerticalOptions="Center" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="2" Padding="20,0">
+                <Button Text="Finalizar" 
+                            BackgroundColor="#152567" 
+                            TextColor="White" 
+                            WidthRequest="300" 
+                            HeightRequest="60" 
+                            CornerRadius="30"
+                            Clicked ="ButtonFinalizarClicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
