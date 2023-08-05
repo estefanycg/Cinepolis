@@ -42,7 +42,7 @@ public class DetalleFactura : PopupPage
                 anyProductWithQuantity = true; // Hay al menos un producto con cantidad mayor a 0
                 stackLayout.Children.Add(new Label
                 {
-                    Text = $"HN-{producto.NombreProducto} X {producto.Cantidad}      L. {producto.Total}",
+                    Text = $"HN-{producto.Nombre} X {producto.Cantidad}      L. {producto.Total}",
                     FontSize = 18,
                     HorizontalOptions = LayoutOptions.StartAndExpand
                 });
